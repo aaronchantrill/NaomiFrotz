@@ -68,7 +68,7 @@ class FrotzPlugin(plugin.SpeechHandlerPlugin):
 
             mode_not_stopped = True
             while mode_not_stopped:
-                texts = self._mic.active_listen(indicator=0)
+                texts = self._mic.active_listen()
 
                 text = ''
                 if texts:
