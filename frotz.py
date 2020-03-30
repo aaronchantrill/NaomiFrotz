@@ -12,13 +12,41 @@ class FrotzPlugin(plugin.SpeechHandlerPlugin):
             self.gettext("ZORK")
         ]
 
-    def handle(self, text, mic, *args):
+    def intents(self):
+        GameKeywords = []
+        if os.path.isfile(os.path.join(os.path.dirname(os.path.realpath(__file__)),"games","zork1.z5")):
+            GameKeywords.extend(["ZORK", "ZORK ONE"])
+        if os.path.isfile(os.path.join(os.path.dirname(os.path.realpath(__file__)),"games","AMFV.z5")):
+            GameKeywords.extend(["A MIND FOREVER VOYAGING", "MIND"])
+        if os.path.isfile(os.path.join(os.path.dirname(os.path.realpath(__file__)),"games","hhgg.z5")):
+            GameKeywords.extend(["THE HITCHHIKERS GUIDE TO THE GALAXY", "HITCHHIKERS"])
+        return {
+            'FrotzIntent': {
+                'locale': {
+                    'en-US': {
+                        'keywords': {
+                            'GameKeyword': GameKeywords
+                        },
+                        'templates': [
+                            'LET US PLAY A GAME',
+                            'LET US PLAY {GameKeyword}',
+                            'PLAY {GameKeyword}'
+                        ]
+                    }
+                },
+                'action': self.handle
+            }
+        }
+
+    def handle(self, intent, mic, *args):
+        _ = self.gettext
+        text = intent['input']
         self._mic = mic
         self._logger = logging.getLogger(__name__)
         # pdb.set_trace()
         self.game_file = "zork1.z5"
         self.game_name = "zork one"
-        if("A MIND FOREVER VOYAGING" in text):
+        if("MIND" in text):
             self.game_file = "AMFV.z5"
             self.game_name = "a mind forever voyaging"
         if("HITCHHIKERS" in text):
@@ -38,7 +66,7 @@ class FrotzPlugin(plugin.SpeechHandlerPlugin):
             "games",
             self.game+".corpus"
         )
-        phrases = ['QUIT']
+        phrases = [_('QUIT')]
         with open(corpus, "r") as f:
             for line in f:
                 line = line.strip()
