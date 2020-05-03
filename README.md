@@ -1,3 +1,23 @@
+---
+id: frotz
+label: Frotz
+title: Frotz - Speechhandler
+type: speechhandlers
+description: "Would you like to play a game?"
+logo: images/plugins/frotz.png
+source: https://github.com/aaronchantrill/NaomiFrotz/edit/master/README.md
+meta:
+  - property: og:title
+    content: "Frotz - Speechhandler"
+  - property: og:description
+    content: "Would you like to play a game?"
+---
+
+
+# Frotz - Speechhandler
+
+<PluginLogo/>
+
 This plugin is for playing infocom games with Jasper.
 
 I have included a modified copy of textPlayer from Daniel Ricks (https://github.com/danielricks/textplayer) which does some handy
@@ -26,3 +46,5 @@ commands into a corpus file in the games directory with the same root name as yo
 I used Zorkword by Mike Threepoint which can be downloaded from http://mirror.ifarchive.org/if-archive/infocom/tools/zorkword.zip.
 Then, since most z-machine games only looked at the first few letters of each word, you may have to guess what some of the words
 actually are.
+
+<EditPageLink/>
