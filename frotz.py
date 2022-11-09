@@ -122,8 +122,9 @@ class FrotzPlugin(plugin.SpeechHandlerPlugin):
                         say_location = False
                         # For some reason, every error condition reports the
                         # location as "West of House". Luckily, error messages
-                        # also always seem to begin with a space.
-                        if (response.description[0] != " "):
+                        # in Zork also always seem to begin with a space.
+                        # Unfortunately, sometimes the description is empty.
+                        if (f"{response.description} "[0] != " "):
                             # Don't state the location at the beginning of each
                             # response
                             # For the most part, only state the location when
